@@ -1,9 +1,7 @@
 //============================================================================
-// Name        : Hello_World.cpp
-// Author      :
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C, Ansi-style
+// Name        : main.cpp
+// Author      : Travis Howse
+// Version     : 0.1
 //============================================================================
 
 #include "socket.h"
