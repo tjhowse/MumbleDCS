@@ -4,7 +4,7 @@ OBJS =		main.o socket.o
 
 LIBS =		WS2_32.Lib
 
-TARGET =	main.exe
+TARGET =	MumbleDCS.exe
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
