@@ -64,7 +64,20 @@ int main(void)
 
 float parseFreq(std::string frequency)
 {
-	return ::atof(frequency.c_str());;
+	char buffer[64];
+	strncpy(buffer,frequency.c_str(),4);
+	buffer[4] = '\0';
+	if (strcmp(buffer, "2006")==0)
+	{
+		strncpy(buffer,frequency.c_str(),12);
+		for (int i = 0; i < 7; i++)
+		{
+			buffer[i] = buffer[i+5];
+		}
+		return atof(buffer);
+	}
+
+	return 0.0f;
 }
 
 unsigned __stdcall Answer(void* a) {
@@ -122,6 +135,7 @@ void initMumble()
 }
 
 void updateMumble(float distance) {
+	printf("Distance: %f\n", distance);
 	if (! lm)
 		return;
 
