@@ -12,12 +12,16 @@
 #include <stdlib.h>
 #include <process.h>
 #include <string>
+#include <time.h>
 
 unsigned __stdcall Answer(void* a);
 int initMumbleLink();
 void initMumble();
 void updateMumble(float distance);
 float parseFreq(std::string frequency);
+std::wstring ctow(const char* src);
+
+std::wstring playerID;
 
 struct LinkedMem {
 	#ifdef WIN32
@@ -48,12 +52,22 @@ LinkedMem *lm = NULL;
 
 int main(void)
 {
-	puts("Hello World!!!");
+	puts("MumbleDCS Loaded.");
 	SocketServer in(1626,5);
+	updateMumble(0);
+	srand(time(NULL));
+
+	char tempPlayerID[128];
+	sprintf(tempPlayerID, "%d", rand()%1000);
+	//std::wstring::
+	//playerID = std::wstring(tempPlayerID);
+	//playerID = itoa(rand()%10000);
+	playerID = ctow(tempPlayerID);
+	printf("Player ID: %s\n", tempPlayerID);
 
 	while (1) {
 		Socket* s=in.Accept();
-		printf("Socket accepted!\n");
+		printf("DCS Has connected.\n");
 
 		unsigned ret;
 		_beginthreadex(0,0,Answer,(void*) s,0,&ret);
@@ -61,7 +75,10 @@ int main(void)
 
 	return EXIT_SUCCESS;
 }
-
+std::wstring ctow(const char* src)
+{
+	return std::wstring(src, src + strlen(src));
+}
 float parseFreq(std::string frequency)
 {
 	char buffer[64];
@@ -87,6 +104,7 @@ unsigned __stdcall Answer(void* a) {
     //std::string r = s->ReceiveLine();
     std::string r = s->ReceiveBytes();
     //if (r.empty()) break;
+
     if (!r.empty())
     {
     	printf(r.c_str());
@@ -181,10 +199,11 @@ void updateMumble(float distance) {
 	lm->fCameraTop[1] = 1.0f;
 	lm->fCameraTop[2] = 0.0f;
 
+
 	// Identifier which uniquely identifies a certain player in a context (e.g. the ingame Name).
-	wcsncpy(lm->identity, L"Unique ID", 256);
+	wcsncpy(lm->identity, playerID.c_str(), 256);
 	// Context should be equal for players which should be able to hear each other positional and
 	// differ for those who shouldn't (e.g. it could contain the server+port and team)
-	memcpy(lm->context, "ContextBlob\x00\x01\x02\x03\x04", 16);
-	lm->context_len = 16;
+	memcpy(lm->context, "DCS:A-10C", 9);
+	lm->context_len = 9;
 }
