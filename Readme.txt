@@ -18,6 +18,7 @@ Open Mumble's settings and go to the "Audio Output" tab. Enable the "Advanced" c
 Enable "Positional Audio" at the top of the page.
 Drag the sliders for "Minimum Distance" and "Maximum Distance" to 1m. Set "Minimum Volume" to 0%.
 Apply Mumble settings.
-Run MumbleDCS.exe from anywhere.
+Download MumbleDCS.exe and the DLLs, put them into a folder together.
+Run MumbleDCS.exe.
 Start DCS.
 Enjoy.
