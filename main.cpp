@@ -52,9 +52,8 @@ int main(void)
 {
 	puts("MumbleDCS Loaded.");
 	SocketServer in(1626,5);
-	updateMumble(0);
 	srand(time(NULL));
-
+	initMumble();
 	char tempPlayerID[128];
 	sprintf(tempPlayerID, "%d", rand()%1000);
 	//std::wstring::
@@ -62,7 +61,9 @@ int main(void)
 	//playerID = itoa(rand()%10000);
 	playerID = ctow(tempPlayerID);
 	printf("Player ID: %s\n", tempPlayerID);
-
+	
+	updateMumble(0);
+	
 	while (1) {
 		Socket* s=in.Accept();
 		printf("DCS Has connected.\n");
