@@ -17,6 +17,7 @@ Add "dofile("./Config/Export/MumbleExportDCS.lua")" to the end of "Export.lua", 
 Open Mumble's settings and go to the "Audio Output" tab. Enable the "Advanced" checkbox in the bottom left if you can't see "Audio Output".
 Enable "Positional Audio" at the top of the page.
 Drag the sliders for "Minimum Distance" and "Maximum Distance" to 1m. Set "Minimum Volume" to 0%.
+Go to the "Plugins" tab. Tick the "Link to Game and Transmit Position" box.
 Apply Mumble settings.
 Download MumbleDCS.exe and the DLLs, put them into a folder together.
 Run MumbleDCS.exe.
